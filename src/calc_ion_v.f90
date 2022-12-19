@@ -155,7 +155,7 @@ subroutine calc_ion_v(iBlock)
 
      if (UseImplicitFieldAlignedMomentum) then
 
-        VIParallel = dt/(1+nu_in) * &
+        VIParallel = dt/(1+dt*nu_in) * &
              (-gpDotB / IRho + gDotB + nu_in * UDotB + &
              VIParallel/dt)
 
