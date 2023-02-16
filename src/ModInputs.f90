@@ -415,7 +415,7 @@ module ModInputs
   
   !!! Atishnal Chand 2021 - declared a logical variable to use reaction rate perturbation using Latin Hypercube Sampling
    logical :: UseReactionRatePerturbations = .false.
-   character (len=iCharLen_) :: cReactionRatesFile
+   character (len=iCharLen_) :: cReactionRatesFile = "none"
   !!!  End Atishnal
 
 contains
