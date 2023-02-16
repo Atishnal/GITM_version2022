@@ -9,7 +9,7 @@ subroutine calc_chemistry(iBlock)
   use ModRates
   use ModEUV
   use ModSources
-  use ModInputs, only: iDebugLevel, UseIonChemistry, UseNeutralChemistry, f107, DoCheckForNans
+  use ModInputs, only: iDebugLevel, UseIonChemistry, UseNeutralChemistry, f107, DoCheckForNans, UseReactionRatePerturbations
   use ModConstants
   use ModReactionRatePerturb !! Atishnal to use module ModReactionRatePerturb
   
