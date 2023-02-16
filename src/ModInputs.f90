@@ -412,6 +412,11 @@ module ModInputs
   real    :: FFTReal(nMaxPerturbFreq), FFTImag(nMaxPerturbFreq), &
        PerturbWaveFreq(nMaxPerturbFreq)
   integer :: nPerturbFreq 
+  
+  !!! Atishnal Chand 2021 - declared a logical variable to use reaction rate perturbation using Latin Hypercube Sampling
+   logical :: UseReactionRatePerturbations = .false.
+   character (len=iCharLen_) :: cReactionRatesFile
+  !!!  End Atishnal
 
 contains
 
