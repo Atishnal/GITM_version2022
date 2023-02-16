@@ -76,10 +76,19 @@ subroutine calc_chemistry(iBlock)
   ! N2+ + NO -> NO+ + N2 + 6.33 eV rrk = 3.6e-16
   real :: rr_n2p_p_no = 3.6e-16
   
-  !! End Atishnal
-  
-  
   !---------------------------------------------------------------------------
+  !! Atishnal passing perturbed reaction rates to GITM chemical scheme
+  if (UseVariableReactionRates) then
+     call get_reaction_rate('n2++o_lt', rr_n2p_p_o_lt)
+     call get_reaction_rate('n2++o_gt', rr_n2p_p_o_gt)
+     call get_reaction_rate('n2++e', rr_n2p_p_e)
+     call get_reaction_rate('n2++n4s', rr_n2p_p_n4s)
+     call get_reaction_rate('n2++o', rr_n2p_p_o)
+     call get_reaction_rate('n2++no', rr_n2p_p_no)
+  endif
+  
+  !! End Atishnal
+
 
   if (iDebugLevel > 3) then
      do iIon = 1, nIons
