@@ -55,6 +55,27 @@ subroutine calc_chemistry(iBlock)
 
   logical :: UseNeutralConstituent(nSpeciesTotal)
   logical :: UseIonConstituent(nIons)
+  
+  !! Atishnal: declared variables for perturbed reaction rates
+
+  ! N2+ + O -> NO+ + N(2D) + 0.70 eV if ti <= 1500.0 then rrk = 1.33e-16 and if ti => 1500.0 then rrk = 6.55e-17
+  real :: rr_n2p_p_o_lt = 1.33e-16
+  real :: rr_n2p_p_o_gt = 6.55e-17
+
+  ! N2+ + e -> 2 N(2D) + 1.04 eV and N2+ + e -> 2 N(4S) + 5.77 eV rrk = 2.2e-13
+  real :: rr_n2p_p_e = 2.2e-13
+
+  ! N2+ + N(4S) -> N2 + N+ + 2.48 eV  rrk = 1.0e-17
+  real :: rr_n2p_p_n4s = 1.0e-17
+
+  ! N2+ + O -> O+(4S) + N2 + 1.96 rrk = 7.0e-18
+  real :: rr_n2p_p_o = 7.0e-18
+
+  ! N2+ + NO -> NO+ + N2 + 6.33 eV rrk = 3.6e-16
+  real :: rr_n2p_p_no = 3.6e-16
+  
+  !! End Atishnal
+  
   !---------------------------------------------------------------------------
 
   if (iDebugLevel > 3) then
@@ -457,9 +478,9 @@ subroutine calc_chemistry(iBlock)
               !!!!!             -> NO+ + N(4S) + 3.08 eV
 
               if (ti<=1500.0) then
-                 rr = 1.33e-16 * ti3m044
+                 rr = rr_n2p_p_o_lt  * ti3m044 ! Atishnal
               else 
-                 rr = 6.55e-17 * ti15m023
+                 rr = rr_n2p_p_o_gt  * ti15m023 ! Atishnal
               endif
 
               Reaction = &
@@ -486,7 +507,7 @@ subroutine calc_chemistry(iBlock)
               ! N2+ + e -> 2 N(2D) + 1.04 eV
               ! N2+ + e -> 2 N(4S) + 5.77 eV
 
-              rr = 2.2e-13 * te3m039
+              rr = rr_n2p_p_e * te3m039  ! Atishnal
 
               Reaction = &
                    rr * &
@@ -508,7 +529,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + N(4S) -> N2 + N+ + 2.48 eV
 
-              rr = 1.0e-17
+              rr = rr_n2p_p_n4s  ! Atishnal
 
               Reaction = &
                    rr * &
@@ -530,7 +551,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + O -> O+(4S) + N2 + 1.96 eV
 
-              rr = 7.0e-18 * ti3m023
+              rr = rr_n2p_p_o * ti3m023  ! Atishnal
 
               Reaction = &
                    rr * &
@@ -555,7 +576,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + NO -> NO+ + N2 + 6.33 eV
 
-              rr = 3.6e-16  ! Richards
+              rr = rr_n2p_p_no  ! Richards ! Atishnal
 
               Reaction = &
                    rr * &
