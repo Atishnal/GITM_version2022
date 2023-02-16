@@ -78,7 +78,7 @@ subroutine calc_chemistry(iBlock)
   
   !---------------------------------------------------------------------------
   !! Atishnal passing perturbed reaction rates to GITM chemical scheme
-  if (UseVariableReactionRates) then
+  if (UseReactionRatePerturbations) then
      call get_reaction_rate('n2++o_lt', rr_n2p_p_o_lt)
      call get_reaction_rate('n2++o_gt', rr_n2p_p_o_gt)
      call get_reaction_rate('n2++e', rr_n2p_p_e)
