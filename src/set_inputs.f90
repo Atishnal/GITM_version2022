@@ -1884,6 +1884,21 @@ subroutine set_inputs
 
 !  KappaTemp0 = 3.6e-4
 
+!!! Atishnal Chand - reads the logical value of the UseReactionRatePerturbations from ModInputs
+
+case ("#USEREACTIONRATEPERTURB")
+           call read_in_logical(UseReactionRatePerturbations, iError)
+           call read_in_string(cReactionRateFile, iError)
+           if (iError /= 0) then
+              write(*,*) 'Incorrect format for #USEREACTIONRATEPERTURB'
+              write(*,*) 'This is for using reaction rate perturbations from Latin Hypercube Sampling Input file.'
+              write(*,*) ''
+              write(*,*) '#USEREACTIONRATEPERTURB'
+              write(*,*) 'UseReactionRatePerturbations        (logical)'
+              IsDone = .true.
+           endif
+  !!! End Atishnal
+           
 contains
 
   subroutine read_in_int(variable, iError)
