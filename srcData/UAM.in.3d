@@ -172,6 +172,12 @@ Some new features:
 T		Shift the [O] density at the lower boundary by 6 months 
 0.0		change the obateness of the Earth by this percent (0 = none)
 
+!! Atishnal
+#USEREACTIONRATEPERTURB
+T         Use Reaction Rate Perturbations
+
+#REACTIONRATEFILE
+reaction_rates.csv        Reaction Rate Filename
 --------------------------------------------------------------------------
 These set the thermal balance of the code:
 
