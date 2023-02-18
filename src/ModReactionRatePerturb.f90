@@ -1,6 +1,10 @@
 ! Declare a module for reaction rate perturbation
 module ModReactionRatePerturb
+  
+  use ModInputs
+  
   implicit none
+  
   integer, parameter :: nRatesMax = 6
   integer :: i, ierror
   
@@ -14,7 +18,7 @@ module ModReactionRatePerturb
        implicit none
 
        ! Open the data file
-       open(10, file = "reaction_rates.csv", status = 'old', Iostat = ierror)
+       open(10, file = cReactionRateFile, status = 'old', Iostat = ierror)
          
        ! Check if there was an error opening the csv file
        if (ierror /= 0) Then
