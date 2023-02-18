@@ -1857,18 +1857,28 @@ subroutine set_inputs
               UseVariableInputs = .true.
            endif
            
-         !!! Atishnal Chand - reads the logical value of the UseReactionRatePerturbations from ModInputs
+         !!! Atishnal Chand - reads the logical value and filename of the UseReactionRatePerturbations from UAM.in file
          case ("#USEREACTIONRATEPERTURB")
            call read_in_logical(UseReactionRatePerturbations, iError)
-           call read_in_string(cReactionRateFile, iError)
            if (iError /= 0) then
               write(*,*) 'Incorrect format for #USEREACTIONRATEPERTURB'
-              write(*,*) 'This is for using reaction rate perturbations from Latin Hypercube Sampling Input file.'
+              write(*,*) 'This is for using perturbed reaction rate.'
               write(*,*) ''
               write(*,*) '#USEREACTIONRATEPERTURB'
               write(*,*) 'UseReactionRatePerturbations        (logical)'
               IsDone = .true.
            endif
+          
+         case ("#REACTIONRATEFILE")
+           call read_in_string(cReactionRateFile, iError)
+           if (iError /= 0) then
+              write(*,*) 'Incorrect format for #REACTIONRATEFILE:'
+              write(*,*) ''
+              write(*,*) '#REACTIONRATEFILE'
+              write(*,*) 'cReactionRateFile       (string)'
+              IsDone = .true.
+           endif
+           
         !!! End Atishnal
 
         case ("#END")
