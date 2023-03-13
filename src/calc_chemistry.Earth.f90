@@ -113,10 +113,10 @@ subroutine calc_chemistry(iBlock)
   ! R16 O+(2P) + O2 -> O+(4S) + O2 + 5.016 eV rr = 1.3e-16
   real :: rr_op2p_p_o2__op4s_p_o2_p_5p016ev = 1.3e-16
 
-  ! R17 ! N+ + O2 -> O2+ + N(4S) + 2.5 eV if (ti<=1000.0) then rr = 1.925e-16 * ti3m045 start here
+  ! R17 ! N+ + O2 -> O2+ + N(4S) + 2.5 eV if (ti<=1000.0) then rr = 1.925e-16 * ti3m045
   real :: rr_np_p_o2__o2p_p_n4s_p_2p5ev_lt = 1.925e-16
 
-  ! R18  ! N+ + O2 -> O2+ + N(4S) + 2.5 eV if (ti=>1000.0) then rr = 3.325e-16 * ti3m045
+  ! R18  ! N+ + O2 -> O2+ + N(4S) + 2.5 eV if (ti=>1000.0) then rr = 3.325e-16
   real :: rr_np_p_o2__o2p_p_n4s_p_2p5ev_gt = 3.325e-16
 
   ! R19 ! N+ + O2 -> O2+ + N(2D) + 0.1 eV  if (ti<=1000.0) then rr =  0.825e-16 * ti3m045
@@ -653,7 +653,7 @@ subroutine calc_chemistry(iBlock)
               ! -----------------------------------------------------------
               ! O+O+M -> O2+M + 5.12 eV
               ! -----------------------------------------------------------
-              rr=4.7e-33 *((300./tn)**(2))
+              rr=rr_o_p_o_p_m__o2_p_m_5p12ev *((300./tn)**(2)) ! 4.7e-33 R1
               rr= rr*1.e-12  !cm6s-1-->m6s-1
 
               Reaction = rr * Neutrals(iO_3P_)**2 *&
@@ -699,7 +699,7 @@ subroutine calc_chemistry(iBlock)
 
               ! O+(2D) + N2 -> N2+ + O + 1.35 eV
 			  
-			  rr = 1.5e-16 * ti3m055
+			  rr = rr_op2d_p_n2__n2p_p_1p35ev * ti3m055  ! 1.5e-16 R2
               Reaction = &
                    rr * &
                    Ions(iO_2DP_) * &
@@ -721,7 +721,7 @@ subroutine calc_chemistry(iBlock)
 
               ! O+(2P) + N2 -> N2+ + O + 3.05 eV
 
-              rr = 2.0e-16 * ti3m055
+              rr = rr_op2p_p_n2__n2p_p_o_p_3p05ev * ti3m055  ! 2.0e-16 R3
               Reaction = &
                    rr * &
                    Ions(iO_2PP_) * &
@@ -745,9 +745,9 @@ subroutine calc_chemistry(iBlock)
               ! N2+ + O2 -> O2+ + N2 + 3.53 eV
 
                if (ti<=1000.0) then
-                  rr = 5.1e-17 * ti3m116
+                  rr = rr_n2p_p_o2__o2p_p_n2_p_3p53ev_lt * ti3m116  ! 5.1e-17 R4
                else 
-                  rr = 1.26e-17 * ti10m067
+                  rr = rr_n2p_p_o2__o2p_p_n2_p_3p53ev_gt * ti10m067 ! 1.26e-17 R5
                endif
 
                Reaction = &
@@ -775,9 +775,9 @@ subroutine calc_chemistry(iBlock)
               !!!!!             -> NO+ + N(4S) + 3.08 eV
 
               if (ti<=1500.0) then
-                 rr = rr_n2p_p_o_lt * ti3m044  ! Atishnal
+                 rr = rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_lt * ti3m044  ! 1.33e-16 R6
               else 
-                 rr = rr_n2p_p_o_gt * ti15m023 ! Atishnal
+                 rr = rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_gt * ti15m023 ! 6.55e-17 R7
               endif
 
               Reaction = &
@@ -804,7 +804,7 @@ subroutine calc_chemistry(iBlock)
               ! N2+ + e -> 2 N(2D) + 1.04 eV
               ! N2+ + e -> 2 N(4S) + 5.77 eV
 
-              rr = rr_n2p_p_e * te3m039 ! Atishnal
+              rr = rr_n2p_p_e__2n2d_p_1p04ev__2n4s_p_5p77ev * te3m039 ! 2.2e-13 R8
 
               Reaction = &
                    rr * &
@@ -826,7 +826,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + N(4S) -> N2 + N+ + 2.48 eV
 
-              rr = rr_n2p_p_n4s ! Atishnal
+              rr = rr_n2p_p_n4s__n2_p_np_p_2p48ev ! 1.0e-17 R9
 
               Reaction = &
                    rr * &
@@ -848,7 +848,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + O -> O+(4S) + N2 + 1.96 eV
 
-              rr = rr_n2p_p_o * ti3m023  ! Atishnal
+              rr = rr_n2p_p_o__op4s_p_n2_p_1p96ev * ti3m023  ! 7.0e-18 R10
 
               Reaction = &
                    rr * &
@@ -873,7 +873,7 @@ subroutine calc_chemistry(iBlock)
 
               ! N2+ + NO -> NO+ + N2 + 6.33 eV
 
-              rr = rr_n2p_p_no  ! Richards  ! Atishnal
+              rr = rr_n2p_p_no__nop_p_p_n2_p_6p33ev  ! Richards 3.6e-16  ! R11
 
               Reaction = &
                    rr * &
@@ -925,9 +925,9 @@ subroutine calc_chemistry(iBlock)
               ! -----------
 
               if (ti<=900.0) then
-                 rr = 1.6e-17 * ti3m052
+                 rr = rr_op4s_p_o2__o2p_p_o_p_1p55ev_lt * ti3m052 ! 1.6e-17 R12
               else
-                 rr = 9e-18 * ti9m092
+                 rr = rr_op4s_p_o2__o2p_p_o_p_1p55ev_gt * ti9m092  ! 9e-18 R13
               endif
 
               Reaction = &
@@ -957,7 +957,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) + O2 -> O2+ + O + 4.865 eV
               ! -----------
 
-              rr = 7.0e-16
+              rr = rr_op2d_p_o2__o2p_p_o_p_4p865ev  ! 7.0e-16 R14
 
               Reaction = &
                    rr * &
@@ -981,7 +981,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) + O2 -> O2+ + O + 6.54 eV
               ! -----------
 
-              rr = 1.3e-16
+              rr = rr_op2p_p_o2__o2p_p_o_p_6p54ev  ! 1.3e-16 R15
               
               Reaction = &
                    rr * &
@@ -1005,7 +1005,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) + O2 -> O+(4S) + O2 + 5.016 eV
               ! -----------
 
-              rr = 1.3e-16
+              rr = rr_op2p_p_o2__op4s_p_o2_p_5p016ev ! 1.3e-16 R16
 
               Reaction = &
                    rr * &
@@ -1029,9 +1029,9 @@ subroutine calc_chemistry(iBlock)
               ! -----------
 
               if (ti<=1000.0) then
-                 rr = 1.925e-16 * ti3m045
+                 rr = rr_np_p_o2__o2p_p_n4s_p_2p5ev_lt * ti3m045 ! 1.925e-16 R17
               else 
-                 rr = 3.325e-16
+                 rr = rr_np_p_o2__o2p_p_n4s_p_2p5ev_gt ! 3.325e-16 R18
               endif
 
              Reaction = &
@@ -1061,9 +1061,9 @@ subroutine calc_chemistry(iBlock)
              ! -----------
 
              if (ti<=1000.0) then
-                rr =  0.825e-16 * ti3m045
+                rr = rr_np_p_o2__o2p_p_n2d_p_0p1ev_lt  * ti3m045 ! 0.825e-16 R19
              else
-                rr = 1.425e-16
+                rr = rr_np_p_o2__o2p_p_n2d_p_0p1ev_gt  ! 1.425e-16 R20
              endif
 
              Reaction = &
@@ -1096,9 +1096,9 @@ subroutine calc_chemistry(iBlock)
              ! -----------
 
              if (ti<=1200.0) then
-                rr = 1.95e-13 * te3m07
+                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_lt * te3m07 ! 1.95e-13 R21
              else
-                rr = 7.39e-14 * te12m056
+                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_gt * te12m056 ! 7.39e-14 R22
              endif
 
              Reaction = &
@@ -1148,7 +1148,7 @@ subroutine calc_chemistry(iBlock)
              ! O2+ + N(4S) -> NO+ + O + 4.21 eV
              ! -----------
 
-             rr = 1.0e-16 ! Richards
+             rr = rr_o2p_p_n4s__nop_p_o_4p21ev ! 1.0e-16 Richards R23
 
              Reaction = &
                   rr * &
@@ -1174,7 +1174,7 @@ subroutine calc_chemistry(iBlock)
              ! O2+ + N(2D) -> NO+ + O + 6.519 eV
              ! -----------
 
-             rr = 1.8e-16 ! Richards
+             rr = rr_o2p_p_n4s__nop_p_o_4p21ev !1.8e-16 ! Richards R24
 
              Reaction = &
                   rr * &
@@ -1197,7 +1197,7 @@ subroutine calc_chemistry(iBlock)
              ! O2+ + N(2P) -> O2+ + N(4S) + 3.565 eV
              ! -----------
 
-             rr = 2.2e-17 ! Richards
+             rr = rr_o2p_p_n2p__o2p_p_n4s_p_3p565ev !2.2e-17 ! Richards R25
 
              Reaction = &
                   rr * &
@@ -1220,7 +1220,7 @@ subroutine calc_chemistry(iBlock)
              ! O2+ + NO -> NO+ + O2 + 2.813 eV
              ! -----------
 
-              rr = 4.5e-16 ! schunk and nagy
+              rr = rr_o2p_p_no_nop_p_o2_p_2p813ev ! 4.5e-16 ! schunk and nagy !R26
 
               Reaction = &
                    rr * &
@@ -1316,7 +1316,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) + O -> O+(4S) + O(1D) + 1.35 eV
               ! -----------
 
-              rr = 1.0e-17
+              rr = rr_op2d_p_o_op4s_p_o3p_p_3p31ev__op4s_p_o1d_p_1p35ev ! 1.0e-17 ! R27
 
               Reaction = &
                    rr * &
@@ -1362,7 +1362,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) + e -> O+(4S) + e + 3.31 eV
               ! -----------
 
-              rr = 6.03e-14 * te3m05
+              rr = rr_op2d_p_e__op4s_p_e_p_3p31ev * te3m05 ! 6.03e-14 R28
 
               Reaction = &
                    rr * &
@@ -1409,7 +1409,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) + O -> O+(4S) + O + 5.0 eV
               ! -----------
 
-              rr = 4.0e-16
+              rr = rr_op2p_p_o__op4s_p_o_p_5p0ev ! 4.0e-16  ! R29
 
               Reaction = &
                    rr * &
@@ -1435,7 +1435,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) + e -> O+(4S) + e + 5.0 eV
               ! -----------
 
-              rr = 3.03e-14 * te3m05
+              rr = rr_op2p_p_e__op4s_p_e_p_5p0ev * te3m05 ! 3.03e-14 R30
 
               Reaction = &
                    rr * &
@@ -1458,7 +1458,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) -> O+(4S) + 2470A
               ! -----------
 
-              rr = 0.047
+              rr = rr_op2p__op4s_p_2470a ! 0.047  ! R31
 
               Reaction = &
                    rr * &
@@ -1475,9 +1475,9 @@ subroutine calc_chemistry(iBlock)
               ! -----------
               
               if (ti<=1000.0) then
-                 rr = 0.275e-16 * ti3m045
+                 rr = rr_np_p_o2__op4s_p_no_p_2p31ev_lt * ti3m045 ! 0.275e-16 ! R32
               else 
-                 rr = 0.475e-16
+                 rr = rr_np_p_o2__op4s_p_no_p_2p31ev_gt ! 0.475e-16  ! R33
               endif
 			 
               Reaction = &
@@ -1506,9 +1506,9 @@ subroutine calc_chemistry(iBlock)
               ! -----------
 
               if (ti<=1000.0) then
-                 rr = 1.2e-18 * ti3m045
+                 rr = rr_op4s_p_n2__nop_p_n4S_p_1p10ev_lt * ti3m045 ! 1.2e-18 ! R34
               else
-                 rr = 7.0e-19 * ti10m212
+                 rr = rr_op4s_p_n2__nop_p_n4S_p_1p10ev_gt * ti10m212 ! 7.0e-19 ! R35
               endif
 
               Reaction = &
@@ -1536,7 +1536,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(4S) + NO -> NO+ + O + 4.36 eV
               ! -----------
 
-              rr = 7.0e-19 * ti3m087
+              rr = rr_op4s_p_no__nop_p_o_p_4p36ev * ti3m087  ! 7.0e-19 ! R36
 
               Reaction = &
                    rr * &
@@ -1559,7 +1559,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(4S) + N(2D) -> N+ + O + 1.45 eV
               ! -----------
 
-              rr = 1.3e-16
+              rr = rr_op4s_p_n2d__np_p_o_p_1p45ev ! 1.3e-16  ! R37
 
               Reaction = &
                    rr * &
@@ -1596,8 +1596,7 @@ subroutine calc_chemistry(iBlock)
               ! -----------
               ! O+(2P) + e -> O+(2D) + e + 1.69 eV
               ! -----------
-
-              rr = 1.84e-13 * te3m05
+              rr = rr_op2p_p_e__op2d_p_e_p_1p69ev * te3m05  ! 1.84e-13 ! R38
 
               Reaction = &
                    rr * &
@@ -1620,7 +1619,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) + N2 -> NO+ + N + 4.41 eV
               ! -----------
 
-              rr = 2.5e-17
+              rr = rr_op2d_p_n2__nop_p_n_p_4p41ev ! 2.5e-17  ! R39
 
               Reaction = &
                    rr * &
@@ -1640,10 +1639,10 @@ subroutine calc_chemistry(iBlock)
                    ChemicalHeatingSubI + Reaction * 1.403
                    
               ! -----------
-              ! O+(2D) + NO -> NO+ + O + 4.37 eV
+              ! O+(2D) + NO -> NO+ + O + 4.37 eV 
               ! -----------
 
-              rr = 1.2e-15
+              rr = rr_op2d_p_no__nop_p_o_p_4p37ev ! 1.2e-15   ! R40
 
               Reaction = &
                    rr * &
@@ -1666,7 +1665,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2P) -> O+(2D) + 7320A
               ! -----------
 
-              rr = 0.171
+              rr = rr_op2p__op2d_p_7320a ! 0.171  ! R41
 
               Reaction = &
                    rr * &
@@ -1681,7 +1680,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) -> O+(4S) + 3726A
               ! -----------
 
-              rr = 7.7e-5
+              rr = rr_op2d__op4s_p_3726a ! 7.7e-5  ! R42
               
               Reaction = &
                    rr * &
@@ -1790,7 +1789,7 @@ subroutine calc_chemistry(iBlock)
               ! He+ + N2 -> N+ + N + He + 0.28 eV
               ! -----------
 
-              rr = 7.8e-10/1.0e6
+              rr = rr_hep_p_n2__np_p_n_p_he_p_0p28ev/1.0e6  ! 7.8e-10 ! R43 
 
               Reaction = &
                    rr * &
@@ -1812,7 +1811,7 @@ subroutine calc_chemistry(iBlock)
               ! He+ + N2 -> N2+ + He ( + ??? eV)
               ! -----------
 
-              rr = 5.2e-10/1.0e6
+              rr = rr_hep_p_n2__n2p_p_he/1.0e6  ! 5.2e-10 ! R44
 
               Reaction = &
                    rr * &
@@ -1833,7 +1832,7 @@ subroutine calc_chemistry(iBlock)
               ! He+ + O2 -> O+ O + He ( + ??? eV)
               ! -----------
 
-              rr = 9.7e-10/1.0e6
+              rr = rr_hep_p_o2__o_p_o_p_he/1.0e6  ! 9.7e-10 ! R45
 
               Reaction = &
                    rr * &
@@ -1851,7 +1850,7 @@ subroutine calc_chemistry(iBlock)
               ! He+ + e- -> He ( + ??? eV)
               ! -----------
 
-              rr = 4.8e-12/1.0e6 * te07
+              rr = rr_hep_p_em__he/1.0e6 * te07  ! 4.8e-12 ! R46
 
               Reaction = &
                    rr * &
@@ -1869,7 +1868,7 @@ subroutine calc_chemistry(iBlock)
                ! O+(2P) + N -> N+ + O + 2.7 eV
                ! -----------
 
-               rr = 1.0e-16
+               rr = rr_op2p_p_n__np_p_o_p_2p7ev ! 1.0e-16  ! R47
 
                Reaction = &
                     rr * &
@@ -1889,7 +1888,7 @@ subroutine calc_chemistry(iBlock)
               ! N+ + NO --> N2+ + O + 2.2 eV
               ! -----------
 
-               rr = 8.33e-17 * ti3m024
+               rr = rr_np_p_no__n2p_p_o_p_2p2ev * ti3m024  ! 8.33e-17 !  R48
 
                Reaction = &
                     rr * &
@@ -1909,10 +1908,10 @@ subroutine calc_chemistry(iBlock)
                     ChemicalHeatingSubI + Reaction * 0.8
 
                ! -----------
-               ! N+ + NO --> NO+ + N(4S) + 3.4 eV
+               ! N+ + NO --> NO+ + N(4S) + 3.4 eV 
                ! -----------
 
-               rr = 4.72e-16 * ti3m024
+               rr = rr_np_p_no__nop_p_n4s_p_3p4ev * ti3m024  ! 4.72e-16 ! R49
 
                Reaction = &
                     rr * &
@@ -1932,13 +1931,13 @@ subroutine calc_chemistry(iBlock)
                     ChemicalHeatingSubI + Reaction * 1.082
 
                ! -----------
-               ! N+ + O2 --> NO+ + O(3P) + 6.67 eV
+               ! N+ + O2 --> NO+ + O(3P) + 6.67 eV  
                ! -----------
               
                if (ti<=1000) then
-                  rr = 0.495e-16 * ti3m045
+                  rr = rr_np_p_o2__nop_p_o3p_p_6p67ev_lt * ti3m045  ! 0.495e-16 ! R50
                else 
-                  rr = 0.855e-16
+                  rr = rr_np_p_o2__nop_p_o3p_p_6p67ev_gt            ! 0.855e-16 ! R51
                endif
 
                Reaction = &
@@ -1962,7 +1961,7 @@ subroutine calc_chemistry(iBlock)
               ! O+(2D) + N -> N+ + O + 1.0 eV
               ! -----------
 
-              rr = 1.5e-16
+              rr = rr_op2d_p_n__np_p_o_p_1p0ev ! 1.5e-16  ! R52
 
               Reaction = &
                    rr * &
@@ -1986,9 +1985,9 @@ subroutine calc_chemistry(iBlock)
               ! -----------
 
               if (ti<=1000.0) then
-                 rr = 1.98e-16 * ti3m045
+                 rr = rr_np_p_o2__nop_p_o1d_p_4p71ev_lt * ti3m045  ! 1.98e-16 ! R53
               else 
-                 rr = 3.42e-16
+                 rr = rr_np_p_o2__nop_p_o1d_p_4p71ev_gt            ! 3.42e-16 ! R54
               endif
 
               Reaction = &
@@ -2021,7 +2020,7 @@ subroutine calc_chemistry(iBlock)
               ! N+ + O -> O+ + N + 0.93 eV
               ! -----------
 
-              rr = 2.2e-18
+              rr = rr_np_p_o__op_p_n_p_0p93ev ! 2.2e-18  ! R55
 
               Reaction = &
                    rr * &
@@ -2048,7 +2047,7 @@ subroutine calc_chemistry(iBlock)
 !              ! N+ + H -> H+ + N + 0.90 eV
 !              ! -----------
 !
-!              rr = 3.6e-12/1.0e6
+!              rr = 3.6e-12/1.0e6 
 !
 !              Reaction = &
 !                   rr * &
@@ -2072,7 +2071,7 @@ subroutine calc_chemistry(iBlock)
               ! NO+ + e -> O + N(2D) + 0.38 eV 
               ! -----------
 
-              rr = 3.4e-13 * te3m085
+              rr = rr_nop_p_e__o_p_n2d_p_0p38ev * te3m085  ! 3.4e-13 ! R56
 
               Reaction = &
                    rr * &
@@ -2095,7 +2094,7 @@ subroutine calc_chemistry(iBlock)
               ! NO+ + e -> O + N(4S) + 2.77 eV
               ! -----------
 
-              rr = 0.6e-13 * te3m085 
+              rr = rr_nop_p_e__o_p_n4s_p_2p77ev * te3m085  ! 0.6e-13 ! R57
 
               Reaction = &
                    rr * &
@@ -2123,7 +2122,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2D) + e -> N(4S) + e + 2.38 eV
               ! -----------
 
-              rr = 3.86e-16 * te3m081
+              rr = rr_n2d_p_e__n4s_p_e_p_2p38ev * te3m081 ! 3.86e-16 ! R58
 
               Reaction = &
                    rr * &
@@ -2143,7 +2142,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2D) + O -> N(4S) + O(1D) + 0.42 eV
               ! -----------
 
-              rr = 6.9e-19
+              rr = rr_n2d_p_o__n4s_p_o3p_p_2p38ev__n4s_p_o1d_p_0p42ev ! 6.9e-19  ! R59
 
               Reaction = &
                    rr * &
@@ -2180,7 +2179,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2D) -> N(4S) + 5200A
               ! -----------
 
-              rr = 1.06e-5
+              rr = rr_n2d__n4s_p_5200a ! 1.06e-5  ! R60
 
               Reaction = &
                    rr * &
@@ -2194,7 +2193,7 @@ subroutine calc_chemistry(iBlock)
               ! NO -> N(4S) + O
               ! -----------
 
-              rr=4.5e-6*exp(-1.e-8*(Neutrals(iO2_)*1.e-6)**0.38)
+              rr = rr_no__n4s_p_o *exp(-1.e-8*(Neutrals(iO2_)*1.e-6)**0.38) ! 4.5e-6 ! R61
 
               Reaction = &
                    rr * &
@@ -2208,7 +2207,7 @@ subroutine calc_chemistry(iBlock)
               ! N(4S) + O2 -> NO + O + 1.385 eV
               ! -----------
               
-              rr = 1.5e-20 * tn * exp(-3270/tn) 
+              rr = rr_n4s_p_o2__no_p_o_p_1p385ev * tn * exp(-3270/tn) ! 1.5e-20 ! R62
 
               Reaction = &
                    rr * &
@@ -2231,8 +2230,7 @@ subroutine calc_chemistry(iBlock)
               ! -----------
               ! N(4S) + NO -> N2 + O + 3.25 eV
               ! -----------
-              rr = 3.4e-17
-
+              rr = rr_n4s_p_no__n2_p_o_p_3p25ev ! 3.4e-17   ! R63
 
               Reaction = &
                    rr * &
@@ -2257,7 +2255,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2P) -> N(2D) + 10400A
               ! -----------
 
-              rr = 7.9e-2
+              rr = rr_n2p__n2d_p_10400a ! 7.9e-2  ! R64
 
               Reaction = &
                    rr * &
@@ -2277,7 +2275,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2D) + O2 -> NO + O(1D) + 1.80 eV
               ! -----------
 
-              rr = 9.7e-18 * exp(-185/tn)
+              rr = rr_n2d_p_o2__no_p_o3p_p_3p76ev__no_p_o1d_p_1p80ev * exp(-185/tn) ! 9.7e-18 ! R65
 
               Reaction = &
                    rr * &
@@ -2316,8 +2314,7 @@ subroutine calc_chemistry(iBlock)
               ! N(2D) + NO -> N2 + O + 5.63 eV
               ! -----------
 
-              rr = 6.7e-17
-
+              rr = rr_n2d_p_no__n2_p_o_p_5p63ev ! 6.7e-17  ! R66
               Reaction = &
                    rr * &
                    Neutrals(iN_2D_) * &
@@ -2440,7 +2437,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) -> O(3P) + 6300A
                  ! ------------
                  
-                 rr = 0.0071
+                 rr = rr_o1d__o3p_p_6300a ! 0.0071  ! R67
                  
                  Reaction = &
                       rr * &
@@ -2456,7 +2453,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) -> O(3P) + 6364A                                               
                  ! ------------                                           
                  
-                 rr = 0.0022
+                 rr = rr_o1d__o3p_p_6364a ! 0.0022 ! R68
                  
                  Reaction = &
                       rr * &
@@ -2471,7 +2468,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) + e -> O(3P) + e + 1.96 eV
                  ! ------------                                             
                  
-                 rr = 2.87e-16 * te3m091
+                 rr = rr_o1d_p_e__o3p_p_e_p_1p96ev * te3m091  ! 2.87e-16 ! R69
                  
                  Reaction = &
                       rr * &
@@ -2492,8 +2489,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) + N2 -> O(3P) + N2 + 1.96 eV
                  ! ------------
                  
-                 rr = 1.8e-17 * exp(107/Tn)
-
+                 rr = rr_o1d_p_n2__o3p_p_n2_p_1p96ev * exp(107/Tn)  ! 1.8e-17 ! R70
                  Reaction = &
                       rr * &
                       Neutrals(iO_1D_) * &
@@ -2515,7 +2511,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) + O2 -> O(3P) + O2 + 1.96 eV
                  ! ------------
                  
-                 rr = 3.2e-17 * exp(67/Tn)
+                 rr = rr_o1d_p_o2__o3p_p_o2_p_1p96ev * exp(67/Tn) ! 3.2e-17 ! R71
                  
                  Reaction = &
                       rr * &
@@ -2538,7 +2534,7 @@ subroutine calc_chemistry(iBlock)
                  ! O(1D) + O(3P) -> O(3P) + O(3P) + 1.96 eV
                  ! ------------
                  
-                 rr = 6.47e-18 * ((Tn/300)**0.14)
+                 rr = rr_o1d_p_o3p__o3p_p_o3p_p_1p96ev * ((Tn/300)**0.14) ! 6.47e-18 ! R72
                  Reaction = &
                       rr * &
                       Neutrals(iO_1D_) * &
@@ -2566,8 +2562,8 @@ subroutine calc_chemistry(iBlock)
 
 !              rr = 6.0e-7
 
-              rr=5.88e-7*(1+0.2*(f107-65)/100)*exp(-2.115e-18* &
-                   (Neutrals(iO2_)*1.e-6)**0.8855)*szap
+              rr = rr_no__nop_p_e *(1+0.2*(f107-65)/100)*exp(-2.115e-18* &
+                   (Neutrals(iO2_)*1.e-6)**0.8855)*szap                        ! 5.88e-7 ! R73
               Reaction = &
                    rr * &
                    Neutrals(iNO_)
