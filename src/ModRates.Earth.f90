@@ -214,7 +214,7 @@ module ModRates
   real :: rr_op4s_p_no__nop_p_o_p_4p36ev = 7.0e-19
 
   ! R37 ! O+(4S) + N(2D) -> N+ + O + 1.45 eV  rr = 1.3e-16
-  rr_op4s_p_n2d__np_p_o_p_1p45ev = 1.3e-16
+  real :: rr_op4s_p_n2d__np_p_o_p_1p45ev = 1.3e-16
 
   ! R38 ! O+(2P) + e -> O+(2D) + e + 1.69 eV  rr = 1.84e-13 * te3m05
   real :: rr_op2p_p_e__op2d_p_e_p_1p69ev = 1.84e-13
