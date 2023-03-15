@@ -129,13 +129,13 @@ subroutine calc_chemistry(iBlock)
   ! O2+ + e -> O(1D) + O(1D) + 3.06 eV if (ti<=1200.0) then rr = 1.95e-13 * te3m07
   ! O2+ + e -> O(3P) + O(1D) + 5.02 eV
   ! O2+ + e -> O(3P) + O(3P) + 6.99 eV
-  real :: rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_lt = 1.95e-13
+  real :: rr_o2p_p_e__o1d_p_o1d_p_3p06ev_lt = 1.95e-13
 
   ! R22
   ! O2+ + e -> O(1D) + O(1D) + 3.06 eV if (ti<=1200.0) then rr = 7.39e-14 * te12m056
   ! O2+ + e -> O(3P) + O(1D) + 5.02 eV
   ! O2+ + e -> O(3P) + O(3P) + 6.99 eV
-  real :: rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_gt = 7.39e-14
+  real :: rr_o2p_p_e__o1d_p_o1d_p_3p06ev_gt = 7.39e-14
 
   ! R23 ! O2+ + N(4S) -> NO+ + O + 4.21 eV rr = 1.0e-16 ! Richards
   real :: rr_o2p_p_n4s__nop_p_o_4p21ev = 1.0e-16
@@ -318,8 +318,8 @@ subroutine calc_chemistry(iBlock)
          call get_reaction_rate('n++o2=>o2++n4s+2p5ev_gt', rr_np_p_o2__o2p_p_n4s_p_2p5ev_gt)  ! R18
          call get_reaction_rate('n++o2=>o2++n2d+0p1ev_lt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_lt)  ! R19
          call get_reaction_rate('n++o2=>o2++n2d+0p1ev_gt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_gt)  ! R20
-         call get_reaction_rate('o2++e=>o1d+o1d+3p06ev=>o3p+o1d+5p02ev=>o3p+o3p+6p99ev_lt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_lt)  ! R21
-         call get_reaction_rate('o2++e=>o1d+o1d+3p06ev=>o3p+o1d+5p02ev=>o3p+o3p+6p99ev_gt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_gt)  ! R22
+         call get_reaction_rate('o2++e=>o1d+o1d+3p06ev_lt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev_lt)  ! R21
+         call get_reaction_rate('o2++e=>o1d+o1d+3p06ev_gt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev_gt)  ! R22
          call get_reaction_rate('o2++n4s=>no++o+4p21ev', rr_o2p_p_n4s__nop_p_o_4p21ev)  ! R23
          call get_reaction_rate('o2++n2d=>no++o+6p519ev', rr_o2p_p_n2d__nop_p_o_p_6p519ev)  ! R24
          call get_reaction_rate('o2++n2p=>o2++n4s+3p565ev', rr_o2p_p_n2p__o2p_p_n4s_p_3p565ev)  ! R25
@@ -1096,9 +1096,9 @@ subroutine calc_chemistry(iBlock)
              ! -----------
 
              if (ti<=1200.0) then
-                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_lt * te3m07 ! 1.95e-13 R21
+                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev_lt * te3m07 ! 1.95e-13 R21
              else
-                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev__o3p_p_o1d_p_5p02ev__o3p_p_o3p_p_6p99_gt * te12m056 ! 7.39e-14 R22
+                rr = rr_o2p_p_e__o1d_p_o1d_p_3p06ev_gt * te12m056 ! 7.39e-14 R22
              endif
 
              Reaction = &
