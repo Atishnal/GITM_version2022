@@ -63,10 +63,10 @@ subroutine calc_chemistry(iBlock)
          call get_reaction_rate('o+o+m=>o2+m+5p12ev', rr_o_p_o_p_m__o2_p_m_5p12ev)  ! R1
          call get_reaction_rate('o+2d+n2=>n2++o+1p35ev', rr_op2d_p_n2__n2p_p_1p35ev)  ! R2
          call get_reaction_rate('o+2p+n2=>n2++o+3p05ev', rr_op2p_p_n2__n2p_p_o_p_3p05ev)  ! R3
-         call get_reaction_rate('n2++o2=>o2++n2+3.53ev_lt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_lt)  ! R4
-         call get_reaction_rate('n2++o2=>o2++n2+3.53ev_gt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_gt)  ! R5
+         call get_reaction_rate('n2++o2=>o2++n2+3p53ev_lt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_lt)  ! R4
+         call get_reaction_rate('n2++o2=>o2++n2+3p53ev_gt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_gt)  ! R5
          call get_reaction_rate('n2++o=>no++n2d+op70ev=>no++n4s+3p08ev_lt', rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_lt)  ! R6
-         call get_reaction_rate('n2++o=>no++n2d+op70ev=>no++n4s+3p08ev_lt', rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_gt)  ! R7
+         call get_reaction_rate('n2++o=>no++n2d+op70ev=>no++n4s+3p08ev_gt', rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_gt)  ! R7
          call get_reaction_rate('n2++e=>2n2d+1p04ev=>2n4s+5p77ev', rr_n2p_p_e__2n2d_p_1p04ev__2n4s_p_5p77ev)  ! R8
          call get_reaction_rate('n2++n4s=>n2+n+2p48ev', rr_n2p_p_n4s__n2_p_np_p_2p48ev)  ! R9
          call get_reaction_rate('n2++o=>op4s+n2+1p96ev', rr_n2p_p_o__op4s_p_n2_p_1p96ev)  ! R10
@@ -102,7 +102,7 @@ subroutine calc_chemistry(iBlock)
          call get_reaction_rate('o+2d+no=>no++o+4p37ev', rr_op2d_p_no__nop_p_o_p_4p37ev)  ! R40
          call get_reaction_rate('o+2p=>o+2d+7320a', rr_op2p__op2d_p_7320a)  ! R41
          call get_reaction_rate('o+2d=>o+4s+3726a', rr_op2d__op4s_p_3726a)  ! R42
-         call get_reaction_rate('he++n2=>n++n+he+op28ev', rr_hep_p_n2__np_p_n_p_he_p_0p28ev)  ! R43
+         call get_reaction_rate('he++n2=>n++n+he+0p28ev', rr_hep_p_n2__np_p_n_p_he_p_0p28ev)  ! R43
          call get_reaction_rate('he++n2=>n2++he', rr_hep_p_n2__n2p_p_he)  ! R44
          call get_reaction_rate('he++o2=>o+o+he', rr_hep_p_o2__o_p_o_p_he)  ! R45
          call get_reaction_rate('he++e-=>he', rr_hep_p_em__he)  ! R46
@@ -113,8 +113,8 @@ subroutine calc_chemistry(iBlock)
          call get_reaction_rate('n++o2=>no++o3p+6p67ev_gt', rr_np_p_o2__nop_p_o3p_p_6p67ev_gt)  ! R51
          call get_reaction_rate('o+2d+n=>n++o+1p0ev', rr_op2d_p_n__np_p_o_p_1p0ev)  ! R52
          call get_reaction_rate('n++o2=>no++o1d+4p71ev_lt', rr_np_p_o2__nop_p_o1d_p_4p71ev_lt)  ! R53
-         call get_reaction_rate('n++o2=>no++o1d+4p71ev_lt', rr_np_p_o2__nop_p_o1d_p_4p71ev_gt)  ! R54
-         call get_reaction_rate('n++o=>o++n+op93ev', rr_np_p_o__op_p_n_p_0p93ev)  ! R55
+         call get_reaction_rate('n++o2=>no++o1d+4p71ev_gt', rr_np_p_o2__nop_p_o1d_p_4p71ev_gt)  ! R54
+         call get_reaction_rate('n++o=>o++n+0p93ev', rr_np_p_o__op_p_n_p_0p93ev)  ! R55
          call get_reaction_rate('no++e=>o+n2d+0p38ev', rr_nop_p_e__o_p_n2d_p_0p38ev)  ! R56
          call get_reaction_rate('no++e=>o+n4s+2p77ev', rr_nop_p_e__o_p_n4s_p_2p77ev)  ! R57
          call get_reaction_rate('n2d+e=>n4s+e+2p38ev', rr_n2d_p_e__n4s_p_e_p_2p38ev)  ! R58
