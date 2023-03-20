@@ -5,12 +5,12 @@ module ModReactionRatePerturb
   
   implicit none
   
-  integer, parameter :: nRatesMax = 6
+  integer, parameter :: nRatesMax = 73
   integer :: i, ierror
   
  ! Declare variables to store the respective reaction rates
   real(kind=8), dimension(nRatesMax) :: PerturbedRates
-  character (len=20), dimension(nRatesMax) :: Reactions
+  character (len=100), dimension(nRatesMax) :: Reactions
   
 ! Declare a subroutine to read the csv data file
   contains
@@ -41,7 +41,7 @@ module ModReactionRatePerturb
 
      subroutine get_reaction_rate(reaction, rate)
        character (len =*), intent(in) :: reaction
-       character (len =20)  :: tempstring
+       character (len =100)  :: tempstring
        real(kind=8), intent(out) :: rate
        logical :: IsFound = .false.
 
