@@ -1,9 +1,9 @@
 #!/bin/bash
 #PBS -P n23
 #PBS -q normal
-#PBS -l walltime=1:00:00
-#PBS -l ncpus=4
-#PBS -l mem=8GB
+#PBS -l walltime=12:00:00
+#PBS -l ncpus=32
+#PBS -l mem=100GB
 #PBS -l wd
 #PBS -m abe
 #PBS -M atishnal.chand@adfa.edu.au
