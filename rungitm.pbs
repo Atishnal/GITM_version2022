@@ -1,10 +1,11 @@
 #!/bin/bash
 #PBS -P n23
 #PBS -q normal
-#PBS -l walltime=12:00:00
+#PBS -l walltime=00:10:00
 #PBS -l ncpus=32
 #PBS -l mem=100GB
 #PBS -l wd
+#PBS -l jobfs=100GB
 #PBS -m abe
 #PBS -M atishnal.chand@adfa.edu.au
 #PBS -j oe
@@ -13,10 +14,19 @@ module load use.own
 module load GITM/210623_Gadi # load ~/privatemodules/GITM/210623_Gadi
 module load openmpi hdf5 intel-compiler
 module load netcdf
+echo $PWD
+THISDIR=$PWD
+export RUNDIR=$PBS_JOBFS
+echo jobfs is $RUNDIR
+cp reaction_rates.csv $PBS_JOBFS
+cd ..	
+make rundir
+cd $PBS_JOBFS
 date
 # Run GITM
 mpirun  -np $PBS_NCPUS ./GITM.exe  > gitm.log.$PBS_NCPUS.$PBS_JOBID 2>&1
 date
 # Postprocess
 ./pGITM  > pgitm.log.$PBS_NCPUS.$PBS_JOBID 2>&1 
-
+tar -czf Results.tar.gz *
+cp Results.tar.gz $THISDIR
