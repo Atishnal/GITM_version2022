@@ -261,8 +261,8 @@ module ModRates
   ! R51 ! N+ + O2 --> NO+ + O(3P) + 6.67 eV if (ti>=1000) then rr = 0.855e-16 line 1617 *
   real(kind=8) :: rr_np_p_o2__nop_p_o3p_p_6p67ev_gt =  8.5499999999999996E-017
 
-  ! R52  ! O+(2D) + N -> N+ + O + 1.0 eV   rr = 1.5e-16
-  real(kind=8) :: rr_op2d_p_n__np_p_o_p_1p0ev = 1.5000000000000000E-016 *
+  ! R52  ! O+(2D) + N -> N+ + O + 1.0 eV   rr = 1.5e-16*
+  real(kind=8) :: rr_op2d_p_n__np_p_o_p_1p0ev = 1.5000000000000000E-016 
 
   ! R53   ! N+ + O2 -> NO+ + O(1D) + 4.71 eV  if (ti<=1000.0) then  rr = 1.98e-16 * ti3m045 *
   real(kind=8) :: rr_np_p_o2__nop_p_o1d_p_4p71ev_lt = 1.9799999999999999E-016
