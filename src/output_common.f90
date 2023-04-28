@@ -1352,17 +1352,17 @@ subroutine output_3dthm(iBlock)
                 Longitude(iLon,iBlock),               &
                 Latitude(iLat,iBlock),                &
                 Altitude_GB(iLon,iLat,iAlt,iBlock),   &
-                EuvHeating(iiLon,iiLat,iiAlt,iBlock)*dt*TempUnit(iiLon,iiLat,iiAlt),    &
+                EuvHeating(iiLon,iiLat,iiAlt,iBlock)*TempUnit(iiLon,iiLat,iiAlt),    &
                 Conduction(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),              &
                 MoleConduction(iiLon,iiLat,iiAlt),                             &
                 EddyCond(iiLon,iiLat,iiAlt),                                   &
                 EddyCondAdia(iiLon,iiLat,iiAlt),                               &
                 ChemicalHeatingRate(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),     &
-                AuroralHeating(iiLon,iiLat,iiAlt)*dt*TempUnit(iiLon,iiLat,iiAlt),       &
-                JouleHeating(iiLon,iiLat,iiAlt)*dt*TempUnit(iiLon,iiLat,iiAlt),         &
-                -NOCooling(iiLon,iiLat,iiAlt)*dt*TempUnit(iiLon,iiLat,iiAlt),           &
-                -OCooling(iiLon,iiLat,iiAlt)*dt*TempUnit(iiLon,iiLat,iiAlt),            &
-                EuvTotal(iiLon,iiLat,iiAlt,iBlock) * dt, &
+                AuroralHeating(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),       &
+                JouleHeating(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),         &
+                -NOCooling(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),           &
+                -OCooling(iiLon,iiLat,iiAlt)*TempUnit(iiLon,iiLat,iiAlt),            &
+                EuvTotal(iiLon,iiLat,iiAlt,iBlock), &
                 cp(iiLon, iiLat, iiAlt, iBlock),  &
                 rho(iiLon, iiLat, iiAlt, iBlock),  &
                 sqrt(sum(EField(iLon,iLat,iAlt,:)**2)), & ! magnitude of E.F.
