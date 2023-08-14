@@ -30,7 +30,7 @@ module ModNewell
        B1aDiff,B2aDiff,B1aDiffn,B2aDiffn,rFaDiff,rFaDiffn,B1pDiff,B2pDiff, &
        B1aMono,B2aMono,B1aMonon,B2aMonon,rFaMono,rFaMonon,B1pMono,B2pMono, &
        B1aWave,B2aWave,B1aWaven,B2aWaven,rFaWave,rFaWaven,B1pWave,B2pWave, &
-       B1aIons,B2aIons,B1aIonsn,B2aIonsn,rFaIons,rFaIonsn, &
+       B1aIons,B2aIons,B1aIonsn,B2aIonsn,rFaIons,rFaIonsn,B1pIons,B2pIons &
        ProbDiffTotal, ProbMonoTotal, ProbWaveTotal, ProbIonsTotal, &
        NumberFluxDiff, EnergyFluxDiff, &
        NumberFluxMono, EnergyFluxMono, &
@@ -39,7 +39,7 @@ module ModNewell
        Area
 
   real, dimension(ndF, nMlts, nMlats) :: &
-       ProbDiff, ProbMono, ProbWave
+       ProbDiff, ProbMono, ProbWave, ProbIons
 
   real    :: dFdt = 1000.0
   integer :: dFBin
@@ -92,6 +92,7 @@ contains
        call calc_probability(ProbDiff, B1pDiff, B2pDiff, ProbDiffTotal)
        call calc_probability(ProbMono, B1pMono, B2pMono, ProbMonoTotal)
        call calc_probability(ProbWave, B1pWave, B2pWave, ProbWaveTotal)
+       call calc_probability(ProbIons, B1pIons, B2pIons, ProbIonsTotal)
        ProbIonsTotal = 1.0
 
        call calc_flux(ProbDiffTotal, B1aDiff,  B2aDiff,  EnergyFluxDiff)
@@ -299,6 +300,47 @@ contains
                      NumberFluxWave(iMlt, iMlat)
              endif
 
+             ! Turned on Ions
+             ! Ions Energy Flux
+
+             if (UseNewellAveraged .or. EnergyFluxIons(iMlt, iMlat)==0) then
+
+                ! Add North and South together
+                IonEnergyFlux(iLon, iLat) = &
+                     EnergyFluxIons(iMlt, iMlat) + EnergyFluxIons(iMlt, iMlat2)
+
+                ! If there are values in both hemisphere, then divide by 2
+                if ( EnergyFluxIons(iMlt, iMlat) * &
+                     EnergyFluxIons(iMlt, iMlat2) /= 0) &
+                     IonEnergyFlux(iLon, iLat) = &
+                     IonEnergyFlux(iLon, iLat)/2.0
+             else
+                IonEnergyFlux(iLon, iLat) = &
+                     EnergyFluxIons(iMlt, iMlat)
+             endif
+
+             ! Ions Number Flux
+
+             if (UseNewellAveraged .or. NumberFluxIons(iMlt, iMlat)==0) then
+
+                ! Add North and South together
+                numflux = &
+                     NumberFluxIons(iMlt, iMlat) + NumberFluxIons(iMlt, iMlat2)
+
+                ! If there are values in both hemisphere, then divide by 2
+                if ( NumberFluxIons(iMlt, iMlat) * &
+                     NumberFluxIons(iMlt, iMlat2) /= 0) &
+                     numflux = numflux/2
+
+             else
+                numflux = NumberFluxIons(iMlt, iMlat)
+             endif
+
+             if (numflux /= 0) then
+                IonAverageEnergy(iLon,iLat) = &
+                     IonEnergyFlux(iLon, iLat)/numflux * &
+                     6.242e11 / 1000.0 ! ergs -> keV
+             endif
           endif
        enddo
     enddo
