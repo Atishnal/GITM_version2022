@@ -474,7 +474,10 @@ subroutine aurora(iBlock)
 
                     AuroralBulkIonRate(j,i,1:nAlts) = &
                          AuroralBulkIonRate(j,i,1:nAlts) + 1e6*Fang_Ion_f(iEnergy,:) * fac
-                    
+                     if (iProc == 0 .and. j==5 .and. i==5) then
+                     write(*,*) 'ion ion rate: ',  j, i, iEnergy, AuroralBulkIonRate(j,i,1:nAlts) , &
+                             1e6*Fang_ion_f(iEnergy,:) * fac, fac
+                   endif
                  endif
                  
               enddo
