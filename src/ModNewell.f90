@@ -30,7 +30,7 @@ module ModNewell
        B1aDiff,B2aDiff,B1aDiffn,B2aDiffn,rFaDiff,rFaDiffn,B1pDiff,B2pDiff, &
        B1aMono,B2aMono,B1aMonon,B2aMonon,rFaMono,rFaMonon,B1pMono,B2pMono, &
        B1aWave,B2aWave,B1aWaven,B2aWaven,rFaWave,rFaWaven,B1pWave,B2pWave, &
-       B1aIons,B2aIons,B1aIonsn,B2aIonsn,rFaIons,rFaIonsn,B1pIons,B2pIons &
+       B1aIons,B2aIons,B1aIonsn,B2aIonsn,rFaIons,rFaIonsn,B1pIons,B2pIons, &
        ProbDiffTotal, ProbMonoTotal, ProbWaveTotal, ProbIonsTotal, &
        NumberFluxDiff, EnergyFluxDiff, &
        NumberFluxMono, EnergyFluxMono, &
