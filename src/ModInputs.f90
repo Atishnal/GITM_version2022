@@ -68,6 +68,7 @@ module ModInputs
   logical :: UseNewellAveraged = .true.
   logical :: UseNewellMono     = .false.
   logical :: UseNewellWave     = .false.
+  logical :: UseNewellIons     = .true.
   logical :: DoNewellRemoveSpikes = .true.
   logical :: DoNewellAverage      = .true.
 
