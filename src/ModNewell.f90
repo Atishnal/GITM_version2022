@@ -156,9 +156,14 @@ contains
           call smooth(EnergyFluxWave)
           call smooth(NumberFluxWave)
 !          write(*,*) "After Smooth, Wave : ", hps, hpn
-
+          
+          call calc_hp(EnergyFluxIons, hps, hpn)
+!          write(*,*) "Before Smooth, Ions : ", hps, hpn
           call smooth(EnergyFluxIons)
           call smooth(NumberFluxIons)
+          call calc_hp(EnergyFluxIons, hps, hpn)
+!          write(*,*) "After Smooth, Ions : ", hps, hpn
+ 
 
        endif
 
