@@ -713,6 +713,10 @@ subroutine set_inputs
            else
               if (UseNewellAurora .and. .not. HasSetAuroraMods) &
                    NormalizeAuroraToHP = .false.
+      ! Set UseIonPrecipitation to true if UseNewellIons (By Atishnal)
+                 if (UseNewellIons) then
+                    UseIonPrecipitation = .true.
+                  endif
            endif
 
         case ("#OVATIONSME")
