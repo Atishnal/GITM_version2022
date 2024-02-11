@@ -62,29 +62,29 @@ subroutine calc_chemistry(iBlock)
   if (UseReactionRatePerturbations) then
          !call get_reaction_rate('o+o+m=>o2+m+5p12ev', rr_o_p_o_p_m__o2_p_m_5p12ev)  ! R1
          call get_reaction_rate('o+2d+n2=>n2++o+1p35ev', rr_op2d_p_n2__n2p_p_1p35ev)  ! R2
-         call get_reaction_rate('o+2p+n2=>n2++o+3p05ev', rr_op2p_p_n2__n2p_p_o_p_3p05ev)  ! R3
+         !call get_reaction_rate('o+2p+n2=>n2++o+3p05ev', rr_op2p_p_n2__n2p_p_o_p_3p05ev)  ! R3
          call get_reaction_rate('n2++o2=>o2++n2+3p53ev_lt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_lt)  ! R4
          call get_reaction_rate('n2++o2=>o2++n2+3p53ev_gt', rr_n2p_p_o2__o2p_p_n2_p_3p53ev_gt)  ! R5
          call get_reaction_rate('n2++o=>no++n2d+op70ev=>no++n4s+3p08ev_lt', rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_lt)  ! R6
          call get_reaction_rate('n2++o=>no++n2d+op70ev=>no++n4s+3p08ev_gt', rr_n2p_p_o__nop_p_n2d_p_0p70ev__nop_p_n4s_p_3p08ev_gt)  ! R7
          call get_reaction_rate('n2++e=>2n2d+1p04ev=>2n4s+5p77ev', rr_n2p_p_e__2n2d_p_1p04ev__2n4s_p_5p77ev)  ! R8
-         call get_reaction_rate('n2++n4s=>n2+n+2p48ev', rr_n2p_p_n4s__n2_p_np_p_2p48ev)  ! R9
-         call get_reaction_rate('n2++o=>op4s+n2+1p96ev', rr_n2p_p_o__op4s_p_n2_p_1p96ev)  ! R10
+         !call get_reaction_rate('n2++n4s=>n2+n+2p48ev', rr_n2p_p_n4s__n2_p_np_p_2p48ev)  ! R9
+         !call get_reaction_rate('n2++o=>op4s+n2+1p96ev', rr_n2p_p_o__op4s_p_n2_p_1p96ev)  ! R10
          call get_reaction_rate('n2++no=>no++n2+6p33', rr_n2p_p_no__nop_p_p_n2_p_6p33ev)  ! R11
          !call get_reaction_rate('o+4s+o2=>o2++o+1p55ev_lt', rr_op4s_p_o2__o2p_p_o_p_1p55ev_lt)  ! R12
          !call get_reaction_rate('o+4s+o2=>o2++o+1p55ev_gt', rr_op4s_p_o2__o2p_p_o_p_1p55ev_gt)  ! R13
          !call get_reaction_rate('o+2d+o2=>o2++o+4p865ev', rr_op2d_p_o2__o2p_p_o_p_4p865ev)  ! R14
          !call get_reaction_rate('o+2p+o2=>o2++o+6p54ev', rr_op2p_p_o2__o2p_p_o_p_6p54ev)  ! R15
          !call get_reaction_rate('o+2p+o2=>o+4s+o2+5p016ev', rr_op2p_p_o2__op4s_p_o2_p_5p016ev)  ! R16
-         call get_reaction_rate('n++o2=>o2++n4s+2p5ev_lt', rr_np_p_o2__o2p_p_n4s_p_2p5ev_lt)  ! R17
-         call get_reaction_rate('n++o2=>o2++n4s+2p5ev_gt', rr_np_p_o2__o2p_p_n4s_p_2p5ev_gt)  ! R18
-         call get_reaction_rate('n++o2=>o2++n2d+0p1ev_lt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_lt)  ! R19
-         call get_reaction_rate('n++o2=>o2++n2d+0p1ev_gt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_gt)  ! R20
+         !call get_reaction_rate('n++o2=>o2++n4s+2p5ev_lt', rr_np_p_o2__o2p_p_n4s_p_2p5ev_lt)  ! R17
+         !call get_reaction_rate('n++o2=>o2++n4s+2p5ev_gt', rr_np_p_o2__o2p_p_n4s_p_2p5ev_gt)  ! R18
+         !call get_reaction_rate('n++o2=>o2++n2d+0p1ev_lt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_lt)  ! R19
+         !call get_reaction_rate('n++o2=>o2++n2d+0p1ev_gt', rr_np_p_o2__o2p_p_n2d_p_0p1ev_gt)  ! R20
          !call get_reaction_rate('o2++e=>o1d+o1d+3p06ev_lt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev_lt)  ! R21
          !call get_reaction_rate('o2++e=>o1d+o1d+3p06ev_gt', rr_o2p_p_e__o1d_p_o1d_p_3p06ev_gt)  ! R22
-         call get_reaction_rate('o2++n4s=>no++o+4p21ev', rr_o2p_p_n4s__nop_p_o_4p21ev)  ! R23
-         call get_reaction_rate('o2++n2d=>no++o+6p519ev', rr_o2p_p_n2d__nop_p_o_p_6p519ev)  ! R24
-         call get_reaction_rate('o2++n2p=>o2++n4s+3p565ev', rr_o2p_p_n2p__o2p_p_n4s_p_3p565ev)  ! R25
+         !call get_reaction_rate('o2++n4s=>no++o+4p21ev', rr_o2p_p_n4s__nop_p_o_4p21ev)  ! R23
+         !call get_reaction_rate('o2++n2d=>no++o+6p519ev', rr_o2p_p_n2d__nop_p_o_p_6p519ev)  ! R24
+         !call get_reaction_rate('o2++n2p=>o2++n4s+3p565ev', rr_o2p_p_n2p__o2p_p_n4s_p_3p565ev)  ! R25
          call get_reaction_rate('o2++no=>no++o2+2p813ev', rr_o2p_p_no_nop_p_o2_p_2p813ev)  ! R26
          !call get_reaction_rate('o+2d+o=>o+4s+o3p+3p31ev=>o+4s+o1d+1p35ev', rr_op2d_p_o_op4s_p_o3p_p_3p31ev__op4s_p_o1d_p_1p35ev)  ! R27
          !call get_reaction_rate('o+2d+e=>o+4s+e+3p31ev', rr_op2d_p_e__op4s_p_e_p_3p31ev)  ! R28
@@ -98,38 +98,38 @@ subroutine calc_chemistry(iBlock)
          call get_reaction_rate('o+4s+no=>no++o+4p36ev', rr_op4s_p_no__nop_p_o_p_4p36ev)  ! R36
          call get_reaction_rate('o+4s+n2d=>n++o+1p45ev', rr_op4s_p_n2d__np_p_o_p_1p45ev)  ! R37
          !call get_reaction_rate('o+2p+e=>o+2d+e+1p69ev', rr_op2p_p_e__op2d_p_e_p_1p69ev)  ! R38
-         call get_reaction_rate('o+2d+n2=>no++n+4p41ev', rr_op2d_p_n2__nop_p_n_p_4p41ev)  ! R39
+         !call get_reaction_rate('o+2d+n2=>no++n+4p41ev', rr_op2d_p_n2__nop_p_n_p_4p41ev)  ! R39
          call get_reaction_rate('o+2d+no=>no++o+4p37ev', rr_op2d_p_no__nop_p_o_p_4p37ev)  ! R40
          !call get_reaction_rate('o+2p=>o+2d+7320a', rr_op2p__op2d_p_7320a)  ! R41
          !call get_reaction_rate('o+2d=>o+4s+3726a', rr_op2d__op4s_p_3726a)  ! R42
-         call get_reaction_rate('he++n2=>n++n+he+0p28ev', rr_hep_p_n2__np_p_n_p_he_p_0p28ev)  ! R43
-         call get_reaction_rate('he++n2=>n2++he', rr_hep_p_n2__n2p_p_he)  ! R44
+         !call get_reaction_rate('he++n2=>n++n+he+0p28ev', rr_hep_p_n2__np_p_n_p_he_p_0p28ev)  ! R43
+         !call get_reaction_rate('he++n2=>n2++he', rr_hep_p_n2__n2p_p_he)  ! R44
          !call get_reaction_rate('he++o2=>o+o+he', rr_hep_p_o2__o_p_o_p_he)  ! R45
          !call get_reaction_rate('he++e-=>he', rr_hep_p_em__he)  ! R46
-         call get_reaction_rate('o+2p+n=>n++o+2p7ev', rr_op2p_p_n__np_p_o_p_2p7ev)  ! R47
+         !call get_reaction_rate('o+2p+n=>n++o+2p7ev', rr_op2p_p_n__np_p_o_p_2p7ev)  ! R47
          call get_reaction_rate('n++no=>n2++o+2p2ev', rr_np_p_no__n2p_p_o_p_2p2ev)  ! R48
          call get_reaction_rate('n++no=>no++n4s+3p4ev', rr_np_p_no__nop_p_n4s_p_3p4ev)  ! R49
-         call get_reaction_rate('n++o2=>no++o3p+6p67ev_lt', rr_np_p_o2__nop_p_o3p_p_6p67ev_lt)  ! R50
-         call get_reaction_rate('n++o2=>no++o3p+6p67ev_gt', rr_np_p_o2__nop_p_o3p_p_6p67ev_gt)  ! R51
-         call get_reaction_rate('o+2d+n=>n++o+1p0ev', rr_op2d_p_n__np_p_o_p_1p0ev)  ! R52
+         !call get_reaction_rate('n++o2=>no++o3p+6p67ev_lt', rr_np_p_o2__nop_p_o3p_p_6p67ev_lt)  ! R50
+         !call get_reaction_rate('n++o2=>no++o3p+6p67ev_gt', rr_np_p_o2__nop_p_o3p_p_6p67ev_gt)  ! R51
+         !call get_reaction_rate('o+2d+n=>n++o+1p0ev', rr_op2d_p_n__np_p_o_p_1p0ev)  ! R52
          call get_reaction_rate('n++o2=>no++o1d+4p71ev_lt', rr_np_p_o2__nop_p_o1d_p_4p71ev_lt)  ! R53
          call get_reaction_rate('n++o2=>no++o1d+4p71ev_gt', rr_np_p_o2__nop_p_o1d_p_4p71ev_gt)  ! R54
-         call get_reaction_rate('n++o=>o++n+0p93ev', rr_np_p_o__op_p_n_p_0p93ev)  ! R55
+         !call get_reaction_rate('n++o=>o++n+0p93ev', rr_np_p_o__op_p_n_p_0p93ev)  ! R55
          call get_reaction_rate('no++e=>o+n2d+0p38ev', rr_nop_p_e__o_p_n2d_p_0p38ev)  ! R56
          call get_reaction_rate('no++e=>o+n4s+2p77ev', rr_nop_p_e__o_p_n4s_p_2p77ev)  ! R57
          call get_reaction_rate('n2d+e=>n4s+e+2p38ev', rr_n2d_p_e__n4s_p_e_p_2p38ev)  ! R58
          call get_reaction_rate('n2d+o=>n4s+o3p+2p38ev=>n4s+o1d+0p42ev', rr_n2d_p_o__n4s_p_o3p_p_2p38ev__n4s_p_o1d_p_0p42ev)  ! R59
-         call get_reaction_rate('n2d=>n4s+5200a', rr_n2d__n4s_p_5200a)  ! R60
+         !call get_reaction_rate('n2d=>n4s+5200a', rr_n2d__n4s_p_5200a)  ! R60
          call get_reaction_rate('no=>n4s+o', rr_no__n4s_p_o)  ! R61
          call get_reaction_rate('n4s+o2=>no+o+1p385ev', rr_n4s_p_o2__no_p_o_p_1p385ev)  ! R62
          call get_reaction_rate('n4s+no=>n2+o+3p25ev', rr_n4s_p_no__n2_p_o_p_3p25ev)  ! R63
-         call get_reaction_rate('n2p=>n2d+10400a', rr_n2p__n2d_p_10400a)  ! R64
+         !call get_reaction_rate('n2p=>n2d+10400a', rr_n2p__n2d_p_10400a)  ! R64
          call get_reaction_rate('n2d+o2=>no+o3p+3p76ev=>no+o1d+1p80ev', rr_n2d_p_o2__no_p_o3p_p_3p76ev__no_p_o1d_p_1p80ev)  ! R65
          call get_reaction_rate('n2d+no=>n2+o+5p63ev', rr_n2d_p_no__n2_p_o_p_5p63ev)  ! R66
          !call get_reaction_rate('o1d=>o3p+6300a', rr_o1d__o3p_p_6300a)  ! R67
          !call get_reaction_rate('o1d=>o3p+6364a', rr_o1d__o3p_p_6364a)  ! R68
          !call get_reaction_rate('o1d+e=>o3p+e+1p96ev', rr_o1d_p_e__o3p_p_e_p_1p96ev)  ! R69
-         call get_reaction_rate('o1d+n2=>o3p+n2+1p96ev', rr_o1d_p_n2__o3p_p_n2_p_1p96ev)  ! R70
+         !call get_reaction_rate('o1d+n2=>o3p+n2+1p96ev', rr_o1d_p_n2__o3p_p_n2_p_1p96ev)  ! R70
          !call get_reaction_rate('o1d+o2=>o3p+o2+1p96ev', rr_o1d_p_o2__o3p_p_o2_p_1p96ev)  ! R71
          !call get_reaction_rate('o1d+o3p=>o3p+o3p+1p96ev', rr_o1d_p_o3p__o3p_p_o3p_p_1p96ev)  ! R72
          call get_reaction_rate('no=>no++e', rr_no__nop_p_e)  ! R73
