@@ -5,7 +5,7 @@ module ModReactionRatePerturb
   
   implicit none
   
-  integer, parameter :: nRatesMax = 50
+  integer, parameter :: nRatesMax = 29
   integer :: i, ierror
   
  ! Declare variables to store the respective reaction rates
