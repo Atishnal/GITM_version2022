@@ -235,9 +235,23 @@ subroutine aurora(iBlock)
         if (UseIonPrecipitation) then
            ion_eflx_ergs = IonEnergyFlux(j,i)
            ion_av_kev = IonAverageEnergy(j,i)
+
+           ! Filters to smooth bad values by Atishnal
+           if (ion_eflx_ergs < 0.0001 .or. ion_eflx_ergs > 0.1) then
+               ion_eflx_ergs = 0.0001
+           endif
+
+           if (ion_av_kev < 1.0 .or. ion_av_kev > 100.0) then
+               ion_av_kev = 30.0
+           endif
+
+           write(,) "ion_eflx_ergs: ", ion_eflx_ergs
+           write(,) "ion_av_kev: ", ion_av_kev
         else
            ion_eflx_ergs = 0.001
            ion_av_kev = 10.0
+           write(,) "ion_eflx_ergs: ", ion_eflx_ergs
+           write(,) "ion_av_kev: ", ion_av_kev
         endif
         
         ! For diffuse auroral models
