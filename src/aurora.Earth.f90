@@ -245,13 +245,13 @@ subroutine aurora(iBlock)
                ion_av_kev = 30.0
            endif
 
-           write(,) "ion_eflx_ergs: ", ion_eflx_ergs
-           write(,) "ion_av_kev: ", ion_av_kev
+           write(*,*) "ion_eflx_ergs: ", ion_eflx_ergs
+           write(*,*) "ion_av_kev: ", ion_av_kev
         else
            ion_eflx_ergs = 0.001
            ion_av_kev = 10.0
-           write(,) "ion_eflx_ergs: ", ion_eflx_ergs
-           write(,) "ion_av_kev: ", ion_av_kev
+           write(*,*) "ion_eflx_ergs: ", ion_eflx_ergs
+           write(*,*) "ion_av_kev: ", ion_av_kev
         endif
         
         ! For diffuse auroral models
