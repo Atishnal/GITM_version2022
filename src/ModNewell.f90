@@ -319,6 +319,14 @@ contains
                      EnergyFluxIons(iMlt, iMlat)
              endif
 
+             ! Initialize IonEnergyFluxFiltered with the value from IonEnergyFlux
+             IonEnergyFluxFiltered(iLon, iLat) = IonEnergyFlux(iLon, iLat)
+
+             ! Apply filtering condition
+             if (IonEnergyFluxFiltered(iLon, iLat) < 0.0001 .or. IonEnergyFluxFiltered(iLon, iLat) > 0.1) then
+                 IonEnergyFluxFiltered(iLon, iLat) = 0.0001
+             endif
+
              ! Ions Number Flux
 
              if (UseNewellAveraged .or. NumberFluxIons(iMlt, iMlat)==0) then
@@ -340,6 +348,14 @@ contains
                 IonAverageEnergy(iLon,iLat) = &
                      IonEnergyFlux(iLon, iLat)/numflux * &
                      6.242e11 / 1000.0 ! ergs -> keV
+             endif
+
+             ! Initialize IonAverageEnergyFiltered with the value from IonAverageEnergy
+             IonAverageEnergyFiltered(iLon, iLat) = IonAverageEnergy(iLon, iLat)
+
+             ! Apply filtering condition
+             if (IonAverageEnergyFiltered(iLon, iLat) < 1.0 .or. IonAverageEnergyFiltered(iLon, iLat) > 100.0) then
+                IonAverageEnergyFiltered(iLon, iLat) = 30.0
              endif
           endif
        enddo
