@@ -237,9 +237,9 @@ subroutine aurora(iBlock)
            ion_av_kev = IonAverageEnergy(j,i)
 
            ! Filters to smooth bad values by Atishnal
-           if (ion_eflx_ergs < 0.0001 .or. ion_eflx_ergs > 0.1) then
-               ion_eflx_ergs = 0.0001
-           endif
+           !if (ion_eflx_ergs < 0.0001 .or. ion_eflx_ergs > 0.1) then
+               !ion_eflx_ergs = 0.0001
+           !endif
 
            if (ion_av_kev < 1.0 .or. ion_av_kev > 100.0) then
                ion_av_kev = 30.0
