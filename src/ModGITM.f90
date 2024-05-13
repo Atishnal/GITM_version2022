@@ -145,7 +145,8 @@ module ModGITM
        ElectronEnergyFlux, ElectronAverageEnergy, &
        IonEnergyFlux, IonAverageEnergy, &
        ElectronEnergyFluxMono, ElectronNumberFluxMono, &
-       ElectronEnergyFluxWave, ElectronNumberFluxWave
+       ElectronEnergyFluxWave, ElectronNumberFluxWave, &
+       IonEnergyFluxFiltered, IonAverageEnergyFiltered
 
   real, allocatable :: Velocity(:,:,:,:,:)
   real, allocatable :: IVelocity(:,:,:,:,:)
